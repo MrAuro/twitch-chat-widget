@@ -9,6 +9,7 @@ export class ThirdPartyEmote {
     public readonly provider: ThirdPartyEmoteProvider,
     public readonly name: string,
     public readonly imageUrl: string,
+    public readonly zeroWidth: boolean,
   ) {}
 
   public static getFrankerfacezImageURL(emoteId: number) {

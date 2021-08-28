@@ -25,6 +25,7 @@ export const parseFFZSet = (set: FrankerfacezSet) => {
       ThirdPartyEmoteProvider.FrankerFaceZ,
       emote.name,
       ThirdPartyEmote.getFrankerfacezImageURL(emote.id),
+      false,
     );
   }
 
@@ -81,6 +82,7 @@ export const getBTTVGlobalEmotes = (): Promise<EmoteMap> =>
           ThirdPartyEmoteProvider.BetterTTV,
           cur.code,
           ThirdPartyEmote.getBetterttvImageURL(cur.id),
+          false, // TODO: add zero width emote support for bttv global emotes
         );
         return acc;
       }, {} as EmoteMap),
@@ -109,6 +111,7 @@ export const getBTTVUserEmotes = (
           ThirdPartyEmoteProvider.BetterTTV,
           cur.code,
           ThirdPartyEmote.getBetterttvImageURL(cur.id),
+          false,
         );
         return acc;
       }, {} as EmoteMap),
@@ -117,3 +120,50 @@ export const getBTTVUserEmotes = (
       console.error("Failed to get BTTV user emotes", error);
       return {};
     });
+<<<<<<< Updated upstream
+=======
+
+export const get7TVGlobalEmotes = (): Promise<EmoteMap> =>
+  api
+    .get<SeventvGlobalBody>("https://api.7tv.app/v2/emotes/global")
+    .then((res) =>
+      res.body.reduce((acc, cur) => {
+        acc[cur.name] = new ThirdPartyEmote(
+          cur.id,
+          ThirdPartyEmoteProvider.SevenTV,
+          cur.name,
+          ThirdPartyEmote.getSevenTVImageURL(cur.id),
+          cur.visibility_simple.includes("ZERO_WIDTH") ? true : false,
+        );
+        return acc;
+      }, {} as EmoteMap),
+    )
+    .catch((error) => {
+      console.error("Failed to get 7TV global emotes", error);
+      return {};
+    });
+
+export const get7TVUserEmotes = (login: string): Promise<EmoteMap> =>
+  api
+    .get<SeventvUserBody>(
+      `https://api.7tv.app/v2/users/${encodeURIComponent(
+        login,
+      )}/emotes`,
+    )
+    .then((res) =>
+      [...(res?.body ?? [])].reduce((acc, cur) => {
+        acc[cur.name] = new ThirdPartyEmote(
+          cur.id,
+          ThirdPartyEmoteProvider.SevenTV,
+          cur.name,
+          ThirdPartyEmote.getSevenTVImageURL(cur.id),
+          cur.visibility_simple.includes("ZERO_WIDTH") ? true : false,
+        );
+        return acc;
+      }, {} as EmoteMap),
+    )
+    .catch((error) => {
+      console.error("Failed to get 7TV user emotes", error);
+      return {};
+    });
+>>>>>>> Stashed changes

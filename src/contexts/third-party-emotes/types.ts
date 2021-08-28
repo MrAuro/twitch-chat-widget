@@ -41,3 +41,16 @@ export interface BetterttvUserBody {
   channelEmotes: BetterttvEmote[];
   sharedEmotes: BetterttvEmote[];
 }
+<<<<<<< Updated upstream
+=======
+
+export interface SeventvEmote {
+  id: string;
+  name: string;
+  visibility_simple: string[];
+}
+
+export type SeventvGlobalBody = SeventvEmote[];
+
+export type SeventvUserBody = SeventvEmote[];
+>>>>>>> Stashed changes
