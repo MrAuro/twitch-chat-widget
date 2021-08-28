@@ -120,8 +120,6 @@ export const getBTTVUserEmotes = (
       console.error("Failed to get BTTV user emotes", error);
       return {};
     });
-<<<<<<< Updated upstream
-=======
 
 export const get7TVGlobalEmotes = (): Promise<EmoteMap> =>
   api
@@ -166,4 +164,3 @@ export const get7TVUserEmotes = (login: string): Promise<EmoteMap> =>
       console.error("Failed to get 7TV user emotes", error);
       return {};
     });
->>>>>>> Stashed changes
