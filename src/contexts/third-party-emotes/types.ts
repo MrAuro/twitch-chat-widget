@@ -5,6 +5,8 @@ export interface ThirdPartyEmoteState {
   ffzGlobalEmotes: EmoteMap;
   bttvUserEmotes: EmoteMap;
   bttvGlobalEmotes: EmoteMap;
+  seventvUserEmotes: EmoteMap;
+  seventvGlobalEmotes: EmoteMap;
 }
 
 export type EmoteMap = Record<string, ThirdPartyEmote>;

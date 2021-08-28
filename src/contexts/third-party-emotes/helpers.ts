@@ -10,6 +10,8 @@ import {
   FrankerfacezGlobalBody,
   FrankerfacezSet,
   FrankerfacezUserBody,
+  SeventvGlobalBody,
+  SeventvUserBody,
 } from "./types";
 
 const api = new ApiClient({});
