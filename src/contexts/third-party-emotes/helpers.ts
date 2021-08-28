@@ -27,6 +27,7 @@ export const parseFFZSet = (set: FrankerfacezSet) => {
       ThirdPartyEmoteProvider.FrankerFaceZ,
       emote.name,
       ThirdPartyEmote.getFrankerfacezImageURL(emote.id),
+      false,
     );
   }
 
@@ -83,6 +84,7 @@ export const getBTTVGlobalEmotes = (): Promise<EmoteMap> =>
           ThirdPartyEmoteProvider.BetterTTV,
           cur.code,
           ThirdPartyEmote.getBetterttvImageURL(cur.id),
+          false, // TODO: add zero width emote support for bttv global emotes
         );
         return acc;
       }, {} as EmoteMap),
@@ -111,6 +113,7 @@ export const getBTTVUserEmotes = (
           ThirdPartyEmoteProvider.BetterTTV,
           cur.code,
           ThirdPartyEmote.getBetterttvImageURL(cur.id),
+          false,
         );
         return acc;
       }, {} as EmoteMap),
@@ -127,9 +130,10 @@ export const get7TVGlobalEmotes = (): Promise<EmoteMap> =>
       res.body.reduce((acc, cur) => {
         acc[cur.name] = new ThirdPartyEmote(
           cur.id,
-          ThirdPartyEmoteProvider.BetterTTV,
+          ThirdPartyEmoteProvider.SevenTV,
           cur.name,
           ThirdPartyEmote.getSevenTVImageURL(cur.id),
+          cur.visibility_simple.includes("ZERO_WIDTH") ? true : false,
         );
         return acc;
       }, {} as EmoteMap),
@@ -150,9 +154,10 @@ export const get7TVUserEmotes = (login: string): Promise<EmoteMap> =>
       [...(res?.body ?? [])].reduce((acc, cur) => {
         acc[cur.name] = new ThirdPartyEmote(
           cur.id,
-          ThirdPartyEmoteProvider.BetterTTV,
+          ThirdPartyEmoteProvider.SevenTV,
           cur.name,
           ThirdPartyEmote.getSevenTVImageURL(cur.id),
+          cur.visibility_simple.includes("ZERO_WIDTH") ? true : false,
         );
         return acc;
       }, {} as EmoteMap),
